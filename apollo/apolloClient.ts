@@ -1,9 +1,10 @@
+import { NextPageContext } from "next/types";
 import { ApolloClient } from "apollo-client";
 import { InMemoryCache, NormalizedCacheObject } from "apollo-cache-inmemory";
 import { setContext } from "apollo-link-context";
 import { createHttpLink } from "apollo-link-http";
 
-export default function createApolloClient(initialState: NormalizedCacheObject, ctx: object) {
+export default function createApolloClient(initialState: NormalizedCacheObject, ctx?: NextPageContext) {
   // The `ctx` (NextPageContext) will only be present on the server.
   // use it to extract auth headers (ctx.req) or similar.
   const httpLink = createHttpLink({

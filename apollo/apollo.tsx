@@ -1,8 +1,9 @@
 import React from "react";
 import App from "next/app";
 import Head from "next/head";
-import { NextComponentType } from "next/types"; // eslint-disable-line import/no-unresolved
+import { NextComponentType, NextPageContext } from "next/types";
 import { ApolloProvider } from "@apollo/react-hooks";
+import { NormalizedCacheObject } from "apollo-cache-inmemory";
 import createApolloClient from "./apolloClient";
 
 // On the client, we store the Apollo Client in the following variable.
@@ -15,7 +16,7 @@ let globalApolloClient: any = null;
  * @param  {NormalizedCacheObject} initialState
  * @param  {NextPageContext} ctx
  */
-const initApolloClient = (initialState: any, ctx: any) => {
+const initApolloClient = (initialState: NormalizedCacheObject, ctx?: NextPageContext) => {
   // Make sure to create a new client for every server-side request so that data
   // isn't shared between connections (which would be bad)
   if (typeof window === "undefined") {
@@ -79,7 +80,14 @@ export const initOnContext = (ctx: any) => {
  * @returns {(PageComponent: ReactNode) => ReactNode}
  */
 export const withApollo = ({ ssr = false } = {}) => (PageComponent: NextComponentType<Object>) => {
-  const WithApollo = ({ apolloClient, apolloState, ...pageProps }: { apolloClient: Object; apolloState: Object }) => {
+  const WithApollo = ({
+    apolloClient,
+    apolloState,
+    ...pageProps
+  }: {
+    apolloClient: Object;
+    apolloState: NormalizedCacheObject;
+  }) => {
     let client;
     if (apolloClient) {
       // Happens on: getDataFromTree & next.js ssr
