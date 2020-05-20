@@ -1,5 +1,4 @@
 import React from "react";
-import { NextComponentType } from "next/types";
 import { useRouter } from "next/router";
 import { useMutation } from "@apollo/react-hooks";
 import gql from "graphql-tag";
@@ -11,7 +10,7 @@ const LOGIN_MUTATION = gql`
   }
 `;
 
-const LoginPage: NextComponentType = () => {
+const LoginPage: React.FC = () => {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const router = useRouter();
