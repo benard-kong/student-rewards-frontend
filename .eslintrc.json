@@ -36,6 +36,7 @@
         ]
       }
     ],
+    "import/no-unresolved": ["error", { "ignore": ["^next/types$"] }],
     "no-unused-vars": "off",
     "no-console": ["error", { "allow": ["warn", "error"] }],
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
