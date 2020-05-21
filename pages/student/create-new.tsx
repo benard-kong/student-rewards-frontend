@@ -1,20 +1,7 @@
 import React from "react";
-import gql from "graphql-tag";
 import { useMutation } from "@apollo/react-hooks";
 import { withApollo } from "../../apollo/apollo";
-
-const CREATE_STUDENT_MUTATION = gql`
-  mutation createStudent($firstName: String!, $lastName: String!, $studentNumber: String!, $grade: Int) {
-    createStudent(firstName: $firstName, lastName: $lastName, studentNumber: $studentNumber, grade: $grade) {
-      id
-      firstName
-      lastName
-      numPoints
-      grade
-      studentNumber
-    }
-  }
-`;
+import { CREATE_STUDENT_MUTATION } from "../../graphql/studentMutations";
 
 const firstNameError = "First name is required";
 const lastNameError = "Last name is required";

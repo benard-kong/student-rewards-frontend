@@ -2,25 +2,9 @@ import React from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { useQuery } from "@apollo/react-hooks";
-import gql from "graphql-tag";
 import { withApollo } from "../../../apollo/apollo";
+import { FIND_STUDENT } from "../../../graphql/studentQueries";
 import { Student } from "../../../typeDefs/typeDefs";
-
-const FIND_STUDENT = gql`
-  query findStudent($studentId: ID!) {
-    findStudent(studentId: $studentId) {
-      id
-      studentNumber
-      firstName
-      lastName
-      numPoints
-      transactions {
-        numPoints
-        createdAt
-      }
-    }
-  }
-`;
 
 const AllStudentsPage: React.FC = () => {
   const router = useRouter();
