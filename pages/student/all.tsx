@@ -4,22 +4,7 @@ import Link from "next/link";
 import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 import { withApollo } from "../../apollo/apollo";
-
-export type Transaction = {
-  id: string;
-  numPoints: number;
-  createdAt: Date;
-  studentName: string;
-  teacherName: string;
-};
-
-export type Student = {
-  id: string;
-  firstName: string;
-  lastName: string;
-  numPoints: number;
-  transactions: Transaction;
-};
+import { Student } from "../../typeDefs/typeDefs";
 
 const QUERY_ALL_STUDENTS = gql`
   query {
