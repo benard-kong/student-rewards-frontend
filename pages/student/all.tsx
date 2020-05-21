@@ -1,5 +1,6 @@
 import React from "react";
 import { useRouter } from "next/router";
+import Link from "next/link";
 import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 import { withApollo } from "../../apollo/apollo";
@@ -55,8 +56,11 @@ const AllStudentsPage: React.FC = () => {
     <div>
       {allStudents.map((student) => (
         <div key={student.id}>
-          <h1>ID: {student.id}</h1>
-          <h2>Name: {`${student.firstName} ${student.lastName}`}</h2>
+          <Link href="/student/[id]" as={student.id} passHref>
+            <a>
+              <h2>{`${student.firstName} ${student.lastName}`}</h2>
+            </a>
+          </Link>
         </div>
       ))}
     </div>
