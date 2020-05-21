@@ -13,7 +13,8 @@ export default function createApolloClient(initialState: NormalizedCacheObject, 
 
   const authLink = setContext((_, { headers }) => {
     // get the authentication token from local storage if it exists
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem(process.env.NEXT_PUBLIC_LOCAL_STORAGE_TOKEN_KEY_NAME!);
+
     return {
       headers: {
         ...headers,
