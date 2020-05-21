@@ -1,7 +1,7 @@
 import React from "react";
 import { useMutation } from "@apollo/react-hooks";
 import { withApollo } from "../../apollo/apollo";
-import { CREATE_STUDENT_MUTATION } from "../../graphql/studentMutations";
+import { CREATE_STUDENT } from "../../graphql/studentMutations";
 
 const firstNameError = "First name is required";
 const lastNameError = "Last name is required";
@@ -14,7 +14,7 @@ const CreateNewStudentPage: React.FC = () => {
   const [studentNumber, setStudentNumber] = React.useState("");
   const [grade, setGrade] = React.useState("");
 
-  const [createStudent, { loading, error }] = useMutation(CREATE_STUDENT_MUTATION);
+  const [createStudent, { loading, error }] = useMutation(CREATE_STUDENT);
 
   const errorMessage: string = React.useMemo(() => {
     let msg = "";
