@@ -37,6 +37,10 @@
       }
     ],
     "import/no-unresolved": ["error", { "ignore": ["^next/types$"] }],
+    "jsx-a11y/anchor-is-valid": [
+      "error",
+      { "components": ["Link"], "specialLink": ["hrefLeft", "hrefRight"], "aspects": ["invalidHref", "preferButton"] }
+    ],
     "no-unused-vars": "off",
     "no-console": ["error", { "allow": ["warn", "error"] }],
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
