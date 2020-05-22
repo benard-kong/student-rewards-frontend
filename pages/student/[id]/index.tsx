@@ -28,9 +28,18 @@ const AllStudentsPage: React.FC = () => {
       </h1>
       <h2>Student Number: {student.studentNumber}</h2>
       <h3>Points: {student.numPoints}</h3>
-      <Link href="/student/[id]/award-points" as={`${id!}/award-points`}>
-        <a>Award Points</a>
-      </Link>
+      <div>
+        <div>
+          <Link href="/student/[id]/award-points" as={`${id!}/award-points`}>
+            <a>Award Points</a>
+          </Link>
+        </div>
+        <div>
+          <Link href="/student/[id]/use-points" as={`${id!}/use-points`}>
+            <a>Use Points</a>
+          </Link>
+        </div>
+      </div>
     </div>
   );
 };

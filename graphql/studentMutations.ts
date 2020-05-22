@@ -18,3 +18,9 @@ export const ADD_POINTS = gql`
     addPoints(studentId: $studentId, numPoints: $numPoints)
   }
 `;
+
+export const USE_POINTS = gql`
+  mutation usePoints($studentId: ID!, $numPoints: Int!) {
+    usePoints(studentId: $studentId, numPoints: $numPoints)
+  }
+`;
