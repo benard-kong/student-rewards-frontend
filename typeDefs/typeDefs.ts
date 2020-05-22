@@ -4,7 +4,7 @@ export type Student = {
   lastName: string;
   studentNumber: string;
   numPoints: number;
-  transactions: Transaction;
+  transactions: Transaction[];
 };
 
 export type Transaction = {

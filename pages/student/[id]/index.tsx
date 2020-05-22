@@ -39,6 +39,11 @@ const AllStudentsPage: React.FC = () => {
             <a>Use Points</a>
           </Link>
         </div>
+        <div>
+          <Link href="/student/[id]/transactions" as={`${id!}/transactions`}>
+            <a>See Transactions</a>
+          </Link>
+        </div>
       </div>
     </div>
   );

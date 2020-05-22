@@ -9,6 +9,7 @@ export const FIND_STUDENT = gql`
       lastName
       numPoints
       transactions {
+        id
         numPoints
         createdAt
       }
