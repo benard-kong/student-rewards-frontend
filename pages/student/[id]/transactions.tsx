@@ -5,8 +5,9 @@ import moment from "moment";
 import { withApollo } from "../../../apollo/apollo";
 import { FIND_STUDENT } from "../../../graphql/studentQueries";
 import { Student, Transaction } from "../../../typeDefs/typeDefs";
+import { DATE_FORMAT, DATE_LOCALE } from "../../../fixtures/dateFormat";
 
-moment.locale("en-us");
+moment.locale(DATE_LOCALE);
 
 const earnedPoints = (transactions: Transaction[]): number => {
   let total = 0;
@@ -55,7 +56,7 @@ const AllStudentsPage: React.FC = () => {
         {transactions.map((transaction) => {
           const { id: transactionId, numPoints, createdAt } = transaction;
           const date: moment.Moment = moment(Number(createdAt));
-          const dateString = date.format("YYYY-MM-DD h:mm a (ddd)");
+          const dateString = date.format(DATE_FORMAT);
           return <p key={transactionId}>{`${numPoints} ${dateString}`}</p>;
         })}
       </div>
