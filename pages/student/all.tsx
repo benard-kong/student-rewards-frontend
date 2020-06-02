@@ -5,6 +5,7 @@ import { useQuery } from "@apollo/react-hooks";
 import { withApollo } from "../../apollo/apollo";
 import { QUERY_ALL_STUDENTS } from "../../graphql/studentQueries";
 import { Student } from "../../typeDefs/typeDefs";
+import { compareStudents } from "../../utils/compareFunctions";
 
 const AllStudentsPage: React.FC = () => {
   const router = useRouter();
@@ -18,14 +19,15 @@ const AllStudentsPage: React.FC = () => {
   if (loading) return <h1>Loading...</h1>;
 
   const { allStudents }: { allStudents: Student[] } = data;
+  const students = allStudents.sort(compareStudents);
 
   return (
     <div>
-      {allStudents.map((student) => (
+      {students.map((student) => (
         <div key={student.id}>
           <Link href="/student/[id]" as={student.id} passHref>
             <a>
-              <h2>{`${student.firstName} ${student.lastName}`}</h2>
+              <h2>{`${student.lastName}, ${student.firstName}`}</h2>
             </a>
           </Link>
         </div>

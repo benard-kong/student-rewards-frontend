@@ -1,7 +1,7 @@
 import React from "react";
 import { useMutation } from "@apollo/react-hooks";
-import { withApollo } from "../../apollo/apollo";
-import { CREATE_TEACHER, CREATE_ADMIN } from "../../graphql/teacherMutations";
+import { withApollo } from "../../../apollo/apollo";
+import { CREATE_TEACHER, CREATE_ADMIN } from "../../../graphql/teacherMutations";
 
 const firstNameError = "First name is required";
 const lastNameError = "Last name is required";
