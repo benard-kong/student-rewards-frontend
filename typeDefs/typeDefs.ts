@@ -7,6 +7,14 @@ export type Student = {
   transactions: Transaction[];
 };
 
+export type Teacher = {
+  id: number;
+  firstName: string;
+  lastName: string;
+  email: string;
+  transactions: Transaction[];
+};
+
 export type Transaction = {
   id: string;
   numPoints: number;
