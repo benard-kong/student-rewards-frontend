@@ -1,6 +1,7 @@
 {
-  "name": "with-typescript-styled-components",
+  "name": "student-rewards-frontend",
   "version": "1.0.0",
+  "description": "Frontend for Student Rewards Website",
   "scripts": {
     "dev": "next",
     "build": "next build",
