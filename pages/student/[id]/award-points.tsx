@@ -1,10 +1,22 @@
 import React from "react";
 import { useRouter } from "next/router";
 import { useMutation, useQuery } from "@apollo/react-hooks";
+import { Button, Container, TextField, styled } from "@material-ui/core";
 import { withApollo } from "../../../apollo/apollo";
 import { Student } from "../../../typeDefs/typeDefs";
 import { FIND_STUDENT } from "../../../graphql/studentQueries";
 import { ADD_POINTS } from "../../../graphql/studentMutations";
+import ContainerCenteredContent from "../../../components/styledComponents/ContainerCenteredContent";
+
+const InputsContainer = styled(Container)({
+  display: "flex",
+  "flex-direction": "column",
+  "font-size": "1rem",
+});
+
+const Input = styled(TextField)({
+  "margin-bottom": "1em",
+});
 
 const AwardPointsPage = () => {
   const [numPoints, setNumPoints] = React.useState(1);
@@ -37,21 +49,19 @@ const AwardPointsPage = () => {
   const { findStudent: student }: { findStudent: Student } = data;
 
   return (
-    <div>
+    <ContainerCenteredContent>
       <h1>
         Award how many points to {student.firstName} {student.lastName}?
       </h1>
       <form onSubmit={handleSubmit}>
-        <input
-          type="number"
-          step="1"
-          value={numPoints}
-          onChange={handleNumChange}
-          autoFocus // eslint-disable-line jsx-a11y/no-autofocus
-        />
-        <button type="submit">{`Award ${numPoints} point${numPoints !== 1 ? "s" : ""}`}</button>
+        <InputsContainer>
+          <Input type="number" value={numPoints} onChange={handleNumChange} variant="outlined" step="1" autoFocus />
+          <Button type="submit" variant="contained" color="primary">
+            {`Award ${numPoints} point${numPoints !== 1 ? "s" : ""}`}
+          </Button>
+        </InputsContainer>
       </form>
-    </div>
+    </ContainerCenteredContent>
   );
 };
 
