@@ -1,7 +1,32 @@
 import React from "react";
 import { useMutation } from "@apollo/react-hooks";
+import styled from "styled-components";
+import { Box, Button, Checkbox, FormControlLabel, styled as muiStyled, TextField, Typography } from "@material-ui/core";
+import ContainerCenteredContent from "../../../components/styledComponents/ContainerCenteredContent";
 import { withApollo } from "../../../apollo/apollo";
 import { CREATE_TEACHER, CREATE_ADMIN } from "../../../graphql/teacherMutations";
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+`;
+
+const InputContainer = muiStyled(Box)({
+  display: "flex",
+
+  "&:not(last-of-type)": {
+    "margin-bottom": "0.8em",
+  },
+});
+
+const Input = muiStyled(TextField)({
+  flex: "1",
+});
+
+const ErrorComponent = muiStyled(Typography)({
+  color: "#f00",
+  "margin-top": "1em",
+});
 
 const firstNameError = "First name is required";
 const lastNameError = "Last name is required";
@@ -40,20 +65,59 @@ const CreateNewStudentPage: React.FC = () => {
   if (createTeacherLoading || createAdminLoading) return <h1>Loading...</h1>;
 
   return (
-    <div>
-      {errorMessage && <h1>Error: {errorMessage}</h1>}
-      <form onSubmit={handleSubmit}>
-        <input type="text" placeholder="First name" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
-        <input type="text" placeholder="Last name" value={lastName} onChange={(e) => setLastName(e.target.value)} />
-        <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
-        <input type="password" placeholder="Grade" value={password} onChange={(e) => setPassword(e.target.value)} />
-        <div>
-          <input id="admin-checkbox" type="checkbox" checked={isAdmin} onChange={() => setIsAdmin(!isAdmin)} />
-          <label htmlFor="admin-checkbox">Admin User</label>
-        </div>
-        <button type="submit">Create New {isAdmin ? "Admin" : "Teacher"}</button>
-      </form>
-    </div>
+    <ContainerCenteredContent>
+      <h1>Fill in the details below to create a new admin or teacher account</h1>
+      <Form onSubmit={handleSubmit}>
+        <InputContainer>
+          <Input
+            type="text"
+            label="First Name"
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+            variant="outlined"
+            autoComplete="off"
+          />
+        </InputContainer>
+        <InputContainer>
+          <Input
+            type="text"
+            label="Last Name"
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
+            variant="outlined"
+            autoComplete="off"
+          />
+        </InputContainer>
+        <InputContainer>
+          <Input
+            type="email"
+            label="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            variant="outlined"
+            autoComplete="off"
+          />
+        </InputContainer>
+        <InputContainer>
+          <Input
+            type="password"
+            label="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            variant="outlined"
+            autoComplete="off"
+          />
+        </InputContainer>
+        <FormControlLabel
+          control={<Checkbox checked={isAdmin} onChange={() => setIsAdmin(!isAdmin)} color="primary" />}
+          label="Admin User"
+        />
+        <Button type="submit" variant="contained" color="primary">
+          Create New {isAdmin ? "Admin" : "Teacher"}
+        </Button>
+      </Form>
+      {errorMessage && <ErrorComponent>Error: {errorMessage}</ErrorComponent>}
+    </ContainerCenteredContent>
   );
 };
 
