@@ -2,6 +2,7 @@ import React from "react";
 import { useRouter } from "next/router";
 import { useQuery } from "@apollo/react-hooks";
 import moment from "moment";
+import ContainerCenteredContent from "../../../components/styledComponents/ContainerCenteredContent";
 import { withApollo } from "../../../apollo/apollo";
 import { FIND_STUDENT } from "../../../graphql/studentQueries";
 import { Student, Transaction } from "../../../typeDefs/typeDefs";
@@ -44,7 +45,7 @@ const AllStudentsPage: React.FC = () => {
   const totalUsedPoints = usedPoints(transactions);
 
   return (
-    <div>
+    <ContainerCenteredContent>
       <h1>
         {student.firstName} {student.lastName}
       </h1>
@@ -57,10 +58,14 @@ const AllStudentsPage: React.FC = () => {
           const { id: transactionId, numPoints, createdAt } = transaction;
           const date: moment.Moment = moment(Number(createdAt));
           const dateString = date.format(DATE_FORMAT);
-          return <p key={transactionId}>{`${numPoints} ${dateString}`}</p>;
+          const pointsString =
+            numPoints > 0
+              ? `Awarded ${numPoints} point${numPoints !== 1 ? "s" : ""}`
+              : `Spent ${-numPoints} point${numPoints !== -1 ? "s" : ""}`;
+          return <p key={transactionId}>{`${pointsString} on ${dateString}`}</p>;
         })}
       </div>
-    </div>
+    </ContainerCenteredContent>
   );
 };
 
