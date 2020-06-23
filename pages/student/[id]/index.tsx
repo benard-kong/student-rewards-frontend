@@ -1,10 +1,15 @@
 import React from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import { Container, styled } from "@material-ui/core";
 import { useQuery } from "@apollo/react-hooks";
 import { withApollo } from "../../../apollo/apollo";
 import { FIND_STUDENT } from "../../../graphql/studentQueries";
 import { Student } from "../../../typeDefs/typeDefs";
+
+const Wrapper = styled(Container)({
+  "text-align": "center",
+});
 
 const AllStudentsPage: React.FC = () => {
   const router = useRouter();
@@ -22,7 +27,7 @@ const AllStudentsPage: React.FC = () => {
   const { findStudent: student }: { findStudent: Student } = data;
 
   return (
-    <div>
+    <Wrapper>
       <h1>
         {student.firstName} {student.lastName}
       </h1>
@@ -45,7 +50,7 @@ const AllStudentsPage: React.FC = () => {
           </Link>
         </div>
       </div>
-    </div>
+    </Wrapper>
   );
 };
 
