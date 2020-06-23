@@ -2,15 +2,11 @@ import React from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { useQuery } from "@apollo/react-hooks";
-import { Container, styled } from "@material-ui/core";
+import ContainerCenteredContent from "../../components/styledComponents/ContainerCenteredContent";
 import { withApollo } from "../../apollo/apollo";
 import { QUERY_ALL_STUDENTS } from "../../graphql/studentQueries";
 import { Student } from "../../typeDefs/typeDefs";
 import { compareStudents } from "../../utils/compareFunctions";
-
-const Wrapper = styled(Container)({
-  "text-align": "center",
-});
 
 const AllStudentsPage: React.FC = () => {
   const router = useRouter();
@@ -27,7 +23,7 @@ const AllStudentsPage: React.FC = () => {
   const students = allStudents.sort(compareStudents);
 
   return (
-    <Wrapper>
+    <ContainerCenteredContent>
       <h1>Students List</h1>
       {students.map((student) => (
         <Link key={student.id} href="/student/[id]" as={student.id} passHref>
@@ -36,7 +32,7 @@ const AllStudentsPage: React.FC = () => {
           </a>
         </Link>
       ))}
-    </Wrapper>
+    </ContainerCenteredContent>
   );
 };
 

@@ -2,6 +2,7 @@ import React from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { useQuery } from "@apollo/react-hooks";
+import ContainerCenteredContent from "../../../components/styledComponents/ContainerCenteredContent";
 import { withApollo } from "../../../apollo/apollo";
 import { QUERY_ALL_TEACHERS } from "../../../graphql/teacherQueries";
 import { Teacher } from "../../../typeDefs/typeDefs";
@@ -22,7 +23,8 @@ const AllStudentsPage: React.FC = () => {
   const teachers = allUsers.sort(compareTeachers);
 
   return (
-    <div>
+    <ContainerCenteredContent>
+      <h1>Teachers List</h1>
       {teachers.map((teacher) => (
         <div key={teacher.id}>
           <Link href="/admin/teacher/[id]" as={`${teacher.id}`} passHref>
@@ -32,7 +34,7 @@ const AllStudentsPage: React.FC = () => {
           </Link>
         </div>
       ))}
-    </div>
+    </ContainerCenteredContent>
   );
 };
 
