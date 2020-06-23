@@ -55,7 +55,7 @@ const AwardPointsPage = () => {
       </h1>
       <form onSubmit={handleSubmit}>
         <InputsContainer>
-          <Input type="number" value={numPoints} onChange={handleNumChange} variant="outlined" step="1" autoFocus />
+          <Input type="number" value={numPoints} onChange={handleNumChange} variant="outlined" autoFocus />
           <Button type="submit" variant="contained" color="primary">
             {`Award ${numPoints} point${numPoints !== 1 ? "s" : ""}`}
           </Button>
