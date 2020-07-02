@@ -5,17 +5,26 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import useTheme from "@material-ui/core/styles/useTheme";
+import { useTheme, withStyles } from "@material-ui/core/styles";
 import { LinkObject } from "../navigation.config";
 
+const StyledListItem = withStyles({
+  disabled: {
+    opacity: "1 !important", // Not able to override defaults without !important?
+  },
+  selected: {
+    "background-color": "rgba(0, 0, 0, 0.3) !important",
+  },
+})(ListItem);
+
 type Props = {
-  linksList: LinkObject[];
   hasDivider: boolean;
-  pathname: string;
+  linksList: LinkObject[];
   mobileClose: Function;
+  pathname: string;
 };
 
-export default function DrawerList({ linksList, hasDivider = false, pathname, mobileClose }: Props) {
+export default function DrawerList({ hasDivider = false, linksList, mobileClose, pathname }: Props) {
   const theme = useTheme();
 
   const handleClick = () => {
@@ -32,14 +41,14 @@ export default function DrawerList({ linksList, hasDivider = false, pathname, mo
         {linksList.map(({ id, displayText, href, Icon }) => (
           <Link key={id} href={href} passHref>
             <MuiLink color="inherit" underline="none">
-              <ListItem button selected={pathname === href} disabled={pathname === href} onClick={handleClick}>
+              <StyledListItem button disabled={pathname === href} onClick={handleClick} selected={pathname === href}>
                 {Icon && (
                   <ListItemIcon>
                     <Icon />
                   </ListItemIcon>
                 )}
                 <ListItemText primary={displayText} />
-              </ListItem>
+              </StyledListItem>
             </MuiLink>
           </Link>
         ))}

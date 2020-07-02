@@ -1,14 +1,9 @@
+/* eslint react/jsx-props-no-spreading: 0 */
 import React from "react";
-import { NextRouter } from "next/router";
-import AppBar from "@material-ui/core/AppBar";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import Drawer from "@material-ui/core/Drawer";
-import Hidden from "@material-ui/core/Hidden";
-import IconButton from "@material-ui/core/IconButton";
+import { AppProps } from "next/app";
+import { AppBar, Box, CssBaseline, Drawer, Hidden, IconButton, Toolbar, Typography } from "@material-ui/core";
+import { makeStyles, useTheme, Theme, createStyles, styled } from "@material-ui/core/styles";
 import MenuIcon from "@material-ui/icons/Menu";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
-import { makeStyles, useTheme, Theme, createStyles } from "@material-ui/core/styles";
 import { adminLinks, primaryLinks } from "./navigation.config";
 import DrawerList from "./partials/DrawerList";
 
@@ -49,19 +44,23 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-interface Props {
-  router: NextRouter;
+const MainComponentContainer = styled(Box)({
+  "background-color": "rgba(0, 0, 0, 0.075)",
+  "min-height": "100vh",
+  "min-width": `calc(100% - ${drawerWidth}px)`,
+  "padding-top": "4em",
+  "padding-left": "1em",
+});
+
+interface Props extends AppProps {
+  pageProps: object;
   window?: () => Window;
 }
 
 // INFO: Temporary
 const isAdmin = true;
 
-export default function ResponsiveDrawer(props: Props) {
-  const {
-    router: { pathname },
-    window,
-  } = props;
+export default function ResponsiveDrawer({ Component, pageProps = {}, router: { pathname }, window }: Props) {
   const classes = useStyles();
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -130,6 +129,9 @@ export default function ResponsiveDrawer(props: Props) {
           </Drawer>
         </Hidden>
       </nav>
+      <MainComponentContainer>
+        <Component {...pageProps} />
+      </MainComponentContainer>
     </div>
   );
 }
